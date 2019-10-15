@@ -18,11 +18,11 @@ router.get('/', function (req, res, next) {
     })
 });
 router.post('/', (req, res, next) => {
-    let sql = 'insert into managersmanage(phone, email, nickname,username,updatedAt) values (?,?,?,?,?)';
-    console.log(req.body);
-    let {phone, email, nickname,username} = req.body;
+    let sql = 'insert into managersmanage(phone, email, nickname,username,updatedAt, auth, superAuth, password) values (?,?,?,?,?,?,?,?)';
+    // console.log(req.body);
+    let {phone, email, nickname,username, auth, superAuth, password} = req.body;
     
-    let data = [phone, email, nickname,username, new Date()];
+    let data = [phone, email, nickname,username, new Date(), auth, superAuth, password];
     // console.log(data);
     db.query(sql, data, (err, result) => {
         if (err) {
@@ -61,9 +61,9 @@ router.delete('/', (req, res, next) => {
 });
 
 router.put('/', (req, res, next) => {
-    let sql = 'update managersmanage set phone=?, email=?, nickname=?,username=?,updatedAt=? where objectId=?';
-    let {phone, email, nickname,username, objectId} = req.body;
-    let data = [phone, email, nickname,username,  new Date(), objectId];
+    let sql = 'update managersmanage set phone=?, email=?, nickname=?,username=?,updatedAt=?, auth=?, superAuth=? where objectId=?';
+    let {phone, email, nickname,username, objectId, auth, superAuth} = req.body;
+    let data = [phone, email, nickname,username,  new Date(), auth, superAuth, objectId];
     db.query(sql, data, (err, result) => {
         if(err) {
             res.send({

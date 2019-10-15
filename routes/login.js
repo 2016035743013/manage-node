@@ -38,7 +38,7 @@ router.post('/updatePwd', function (req, res, next) {
     })
 });
 router.post('/', (req, res, next) => {
-    let sql = 'select objectId, phone,email,nickname,username from managersmanage where username=? and password=?';
+    let sql = 'select objectId, phone,email,nickname,username, auth, superAuth from managersmanage where username=? and password=?';
     console.log(req.body);
     let {password, username} = req.body;
     
